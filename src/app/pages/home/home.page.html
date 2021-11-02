@@ -18,3 +18,9 @@
     <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
   </div>
 </ion-content>
+
+<ion-content [fullscreen]="true">
+  <ion-button (click)="cerrar_sesion()">Cerrar sesión</ion-button>
+  <ion-button routerLink="/contacto">Contacto</ion-button>
+  <ion-button routerLink="/productos">Productos</ion-button>
+</ion-content>
