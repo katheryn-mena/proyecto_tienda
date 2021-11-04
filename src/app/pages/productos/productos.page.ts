@@ -40,24 +40,25 @@ export class ProductosPage implements OnInit {
   agregarProducto(producto: Producto){
     this.storage.create();
     this.storage.get('lista_productos').then((productos: Producto[])=>{
-      let existe: boolean = false;
-      for(let p of productos){
-        if (producto.identificador == p.identificador) {
-          existe = true;
-          break;
-        }
-      }
-      if (existe) {
-        alert('El producto ya existe')
+      if (!productos) {
+        this.storage.set('lista_productos',[producto]);
+        alert('Producto agregado');
       }else{
-        if (!productos) {
-          this.storage.set('lista_productos', [producto]);
+        let existe: boolean = false;
+        for(let p of productos){
+          if (producto.identificador == p.identificador) {
+            existe = true;
+            break;
+           }
+        }
+        if (existe) {
+          alert('El producto ya existe');
         }else{
           productos.push(producto);
           this.storage.set('lista_productos', productos);
+          alert('Producto agregado');
         }
       }
-      alert(this.storage.get('lista_usuarios'));
     });
   }
 }
