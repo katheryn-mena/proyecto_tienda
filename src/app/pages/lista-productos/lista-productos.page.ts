@@ -40,4 +40,8 @@ export class ListaProductosPage implements OnInit {
     });
   }
 
+  modificar(id){
+    
+  }
+
 }
