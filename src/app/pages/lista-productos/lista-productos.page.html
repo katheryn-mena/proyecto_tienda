@@ -6,19 +6,21 @@
 
 <ion-content>
   <ion-list *ngFor="let p of lista">
-    <ion-item>
-      <ion-label>Identificador: {{p.identificador}}</ion-label>
-    </ion-item>
+    <form [formGroup]="productito" (ngSubmit)="modificar()">
+      <ion-item>
+        <ion-input type="number" formControlName="identificadorcito">{{p.identificador}} - Identificador: </ion-input>
+      </ion-item>
 
-    <ion-item>
-      <ion-input>{{p.nombre}}</ion-input>
-    </ion-item>
+      <ion-item>
+        <ion-input type="text" formControlName="nombrecito">{{p.nombre}} - Nombre: </ion-input>
+      </ion-item>
 
-    <ion-item>
-      <ion-input>{{p.precio}}</ion-input>
-    </ion-item>
-
-    <ion-button (click)="eliminar(p.identificador)">ELIMINAR</ion-button>
-    <ion-button (click)="modificar(p.identificador)">MODIFICAR</ion-button>
+      <ion-item>
+        <ion-input type="number" formControlName="precito">{{p.precio}} - Precio: </ion-input>
+      </ion-item>
+    
+      <ion-button (click)="eliminar(p.identificador)">ELIMINAR</ion-button>
+      <ion-button type="submit">MODIFICAR</ion-button>
+    </form>  
   </ion-list>
 </ion-content>

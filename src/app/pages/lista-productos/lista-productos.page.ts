@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 import { Storage } from '@ionic/storage';
 
 export interface Producto{
@@ -15,6 +16,11 @@ export interface Producto{
 export class ListaProductosPage implements OnInit {
 
   lista: Producto[] = [];
+  productito = new FormGroup({
+    identificadorcito: new FormControl(),
+    nombrecito: new FormControl(),
+    precito: new FormControl()
+  });
 
   constructor(private storage: Storage) { }
 
@@ -40,8 +46,25 @@ export class ListaProductosPage implements OnInit {
     });
   }
 
-  modificar(id){
-    
+  modificar(){
+    var producto: any;
+    producto = {
+      identificador: this.productito.controls.identificadorcito.value,
+      nombre: this.productito.controls.nombrecito.value,
+      precio: this.productito.controls.precito.value
+    }
+    this.storage.create();
+    this.storage.get('lista_productos').then((productos: Producto[])=>{
+      this.lista = [];
+      for (let pro of productos){
+        if (producto.identificador == pro.identificador) {
+          this.lista.push(producto);
+        }else{
+          this.lista.push(pro);
+        }
+      }
+      this.storage.set('lista_productos', this.lista);
+    });
   }
 
 }
